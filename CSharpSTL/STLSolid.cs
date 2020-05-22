@@ -41,6 +41,17 @@ namespace CSharpSTL
     {
         public List<STLFacet> Facets { get; set; }
 
+
+        public static STLSolid CreateFromFile(string file)
+        {
+            STLSolid result;
+            using (FileStream fs = File.Open(file, FileMode.Open, FileAccess.Read))
+            {
+                result = CreateFromStream(fs);
+            }
+            return result;
+        }
+
         public static STLSolid CreateFromStream(Stream input)
         {
             const string C_SOLID = "solid";
