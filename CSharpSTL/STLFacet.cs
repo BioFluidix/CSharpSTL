@@ -28,9 +28,19 @@
 
 namespace CSharpSTL
 {
+    /// <summary>
+    /// A STL solids facet.
+    /// </summary>
     public class STLFacet
     {
+        /// <summary>
+        /// The normal of the facet.
+        /// </summary>
         public STLNormal Normal { get; set; }
+
+        /// <summary>
+        /// The facets outter loop.
+        /// </summary>
         public STLOuterLoop OuterLoop { get; set; }
     }
 }

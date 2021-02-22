@@ -37,10 +37,24 @@ using System.Text;
 
 namespace CSharpSTL
 {
+
+
+
+    /// <summary>
+    /// A reader for the STL file format.
+    /// </summary>
     public class STLSolid
     {
+        /// <summary>
+        /// The facets of the solid.
+        /// </summary>
         public List<STLFacet> Facets { get; set; }
 
+        /// <summary>
+        /// Creates a STL solid from a file. 
+        /// </summary>
+        /// <param name="file">The source file.</param>
+        /// <returns>A STL solid.</returns>
 
         public static STLSolid CreateFromFile(string file)
         {
@@ -52,6 +66,11 @@ namespace CSharpSTL
             return result;
         }
 
+        /// <summary>
+        /// Creates a STL solid from a stream. 
+        /// </summary>
+        /// <param name="input">The source stream.</param>
+        /// <returns>A STL solid.</returns>
         public static STLSolid CreateFromStream(Stream input)
         {
             const string C_SOLID = "solid";
@@ -64,6 +83,11 @@ namespace CSharpSTL
                     CreateFromBinaryStream(bstream);
         }
 
+        /// <summary>
+        /// Creates a STL solid from a binary stream. 
+        /// </summary>
+        /// <param name="input">The source stream.</param>
+        /// <returns>A STL solid.</returns>
         public static STLSolid CreateFromASCIIStream(Stream input)
         {
             AntlrInputStream inputStream = new AntlrInputStream(input);
@@ -76,6 +100,11 @@ namespace CSharpSTL
             return visitor.Solid;
         }
 
+        /// <summary>
+        /// Creates a STL solid from an ASCII stream. 
+        /// </summary>
+        /// <param name="input">The source stream.</param>
+        /// <returns>A STL solid.</returns>
         public static STLSolid CreateFromBinaryStream(Stream input)
         {
             var solid = new STLSolid();
@@ -130,6 +159,9 @@ namespace CSharpSTL
         }
 
 
+
+        #region machine room
+
         private static readonly Func<Stream, byte[], uint> DecodeUInt16
             = (s, b) => BitConverter.ToUInt16(Read(s, b, 2, ByteTransferOperator(2)), 0);
 
@@ -157,6 +189,7 @@ namespace CSharpSTL
         private static Action<byte[]> ByteTransferOperator(int length)
             => BitConverter.IsLittleEndian ? null : new Action<byte[]>(s => Array.Reverse(s, 0, length));
 
+        #endregion
 
     }
 

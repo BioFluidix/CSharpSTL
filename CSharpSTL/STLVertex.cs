@@ -28,6 +28,9 @@
 
 namespace CSharpSTL
 {
+    /// <summary>
+    /// A STL vertex.
+    /// </summary>
     public class STLVertex
     {
         public float X { get; set; }

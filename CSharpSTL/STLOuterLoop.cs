@@ -28,6 +28,9 @@
 
 namespace CSharpSTL
 {
+    /// <summary>
+    /// The outter loop of a STL facet.
+    /// </summary>
     public class STLOuterLoop
     {
         public STLVertex V0 { get; set; }
